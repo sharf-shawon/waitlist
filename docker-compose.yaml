@@ -11,10 +11,12 @@ services:
 
   waitlist:
     build: .
+    # image: sharfy9/waitlist:latest
     container_name: waitlist
     depends_on:
       - db
     volumes:
+      - ./nginx.conf:/app/nginx.conf
       - ./static:/app/staticfiles
     env_file:
       - .env.local

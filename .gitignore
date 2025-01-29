@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -113,3 +113,4 @@ node_modules/
 
 # VS Code
 .vscode
+**/__pycache__/*.*
