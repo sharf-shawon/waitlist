@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env.local
+    container_name: db
+
+  waitlist:
+    build: .
+    container_name: waitlist
+    depends_on:
+      - db
+    volumes:
+      - ./static:/app/staticfiles
+    env_file:
+      - .env.local
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - "8001:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/static:ro
+    depends_on:
+      - waitlist
+volumes:
+  postgres_data:
